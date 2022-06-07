@@ -123,8 +123,8 @@ module.exports = {
         for (const existingFolder of existingFolders) {
           const replaceQuery =
             strapi.db.dialect.client === 'sqlite'
-              ? '? || substring(??, ?)'
-              : 'CONCAT(?, substring(??, ?))';
+              ? '? || SUBSTRING(??, ?)'
+              : 'CONCAT(CAST(? as CHAR), SUBSTRING(??, ?))';
 
           // update path for folders themselves & folders below
           await strapi.db
